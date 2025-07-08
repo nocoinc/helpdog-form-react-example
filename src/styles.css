@@ -1,4 +1,448 @@
 .App {
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.form-container p {
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.submit-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+
+/* ステップインジケーター */
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 40px 0;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 80px;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width: 80px;
+  height: 2px;
+  background-color: #e1e1e1;
+  z-index: -1;
+}
+
+.step.active:not(:last-child)::after {
+  background-color: #007bff;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e1e1e1;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+  background-color: #007bff;
+  color: white;
+}
+
+.step-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.step.active .step-label {
+  color: #007bff;
+}
+
+/* フォームセクション */
+.form-section {
+  margin-bottom: 32px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.form-section h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.2em;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 8px;
+}
+
+/* ラジオボタンとチェックボックス */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-label,
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  font-weight: normal;
+}
+
+.radio-label:hover,
+.checkbox-label:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* セレクトボックス */
+.form-group select {
+  padding: 12px 16px;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+  background-color: white;
+  cursor: pointer;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* フォームアクション */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e1e1e1;
+}
+
+.next-btn,
+.back-btn,
+.reset-btn {
+  padding: 14px 32px;
+  border: 2px solid #007bff;
+  background-color: transparent;
+  color: #007bff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover,
+.back-btn:hover,
+.reset-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.next-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.next-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 確認画面 */
+.confirmation-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.confirmation-section {
+  margin-bottom: 32px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.confirmation-section h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.confirmation-list {
+  margin: 0;
+}
+
+.confirmation-list dt {
+  font-weight: 600;
+  color: #333;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.confirmation-list dt:first-child {
+  margin-top: 0;
+}
+
+.confirmation-list dd {
+  margin: 0 0 8px 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.message-preview {
+  white-space: pre-wrap;
+  background-color: white;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e1e1e1;
+}
+
+/* 完了画面 */
+.completion-content {
   text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #28a745;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0 auto 24px auto;
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.completion-content h3 {
+  color: #28a745;
+  margin: 0 0 16px 0;
+  font-size: 1.8em;
+}
+
+.completion-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.completion-info {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 24px 0;
+  border: 1px solid #e9ecef;
+}
+
+.completion-info p {
+  margin: 8px 0;
+  color: #333;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .form-container {
+    padding: 20px;
+  }
+  
+  .form-container h1 {
+    font-size: 1.5em;
+  }
+  
+  .step-indicator {
+    margin: 20px 0 30px 0;
+  }
+  
+  .step {
+    min-width: 60px;
+  }
+  
+  .step:not(:last-child)::after {
+    width: 60px;
+  }
+  
+  .step-number {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+  
+  .step-label {
+    font-size: 11px;
+  }
+  
+  .form-section {
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .form-section h3 {
+    font-size: 1.1em;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .next-btn,
+  .back-btn,
+  .submit-btn,
+  .reset-btn {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  
+  .confirmation-section {
+    padding: 16px;
+  }
+  
+  .completion-content {
+    padding: 30px 15px;
+  }
+  
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+  }
 }
