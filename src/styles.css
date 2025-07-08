@@ -308,6 +308,41 @@
   border: 1px solid #e1e1e1;
 }
 
+/* Helpdog検索ボックス */
+.helpdog-search-container {
+  margin: 12px 0;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.helpdog-search-container iframe {
+  border-radius: 8px;
+}
+
+.helpdog-search-box {
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+}
+
+.help-text {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0 8px 0;
+  font-style: italic;
+}
+
+/* 検索結果が表示された時の調整 */
+.helpdog-search-container:has(iframe[height]) {
+  background-color: white;
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
 /* 完了画面 */
 .completion-content {
   text-align: center;

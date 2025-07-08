@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HelpdogSearch from "./HelpdogSearch";
 import "./styles.css";
 
 interface FormData {
@@ -270,6 +271,22 @@ export default function App() {
             required
           />
         </div>
+
+        {/* Helpdog検索ボックス - メッセージと件名の内容に基づいて検索 */}
+        <div className="form-group">
+          <label>関連するヘルプ記事</label>
+          <p className="help-text">入力内容に関連する記事が表示されます</p>
+          <HelpdogSearch
+            siteId="01JMEKJXW7C8VCR2ZYN5C67QB8"
+            queryFields="#subject,#message,input[name='inquiryType']:checked"
+            className="helpdog-search-box"
+            tracking={{
+              form_id: "contact-form",
+              form_name: "お問い合わせフォーム",
+              hosting_type: "external"
+            }}
+          />
+        </div>
       </div>
 
       <div className="form-section">
@@ -359,7 +376,7 @@ export default function App() {
       <p>確認次第、ご連絡いたします。</p>
       
       <div className="completion-info">
-        <p><strong>受付番号:</strong> {Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+        <p><strong>受付番号:</strong> {Math.random().toString(36).substring(2, 11).toUpperCase()}</p>
         <p><strong>送信日時:</strong> {new Date().toLocaleString('ja-JP')}</p>
       </div>
 
