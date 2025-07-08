@@ -1,27 +1,27 @@
-# React お問い合わせフォーム with Helpdog検索連携
+# React お問い合わせフォーム with Helpdog 検索連携
 
-3ステップのお問い合わせフォーム（入力 → 確認 → 完了）とHelpdogの検索連携を実装したサンプルです。
+3 ステップのお問い合わせフォーム（入力 → 確認 → 完了）と Helpdog の検索連携を実装したサンプルです。
 
 ## 主な機能
 
-- **3ステップフォーム**: 入力画面、確認画面、完了画面
-- **Helpdog検索連携**: フォーム入力内容に基づいて関連ヘルプ記事を表示
+- **3 ステップフォーム**: 入力画面、確認画面、完了画面
+- **Helpdog 検索連携**: フォーム入力内容に基づいて関連ヘルプ記事を表示
 - **リアルタイム検索**: 入力と同時に検索結果を更新
 - **レスポンシブデザイン**: モバイル対応
 
 ## 実装のポイント
 
-フォームの入力値を監視して自動的にHelpdogの検索を実行：
+フォームの入力値を監視して自動的に Helpdog の検索を実行：
 
 ```tsx
 <HelpdogSearch
-  siteId="01JMEKJXW7C8VCR2ZYN5C67QB8"
-  queryFields="#subject,#message,input[name='inquiryType']:checked"
+  siteId="01JPVM5ZPX7E96GTDF9S3W1MS9"
+  queryFields="#subject,#message,input[name='inquiryType'],input[name='services'],#urgency"
   className="helpdog-search-box"
   tracking={{
     form_id: "contact-form",
     form_name: "お問い合わせフォーム",
-    hosting_type: "external"
+    hosting_type: "external",
   }}
 />
 ```

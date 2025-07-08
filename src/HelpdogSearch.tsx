@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface HelpdogSearchProps {
   siteId: string;
@@ -26,11 +26,13 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
   siteId,
   queryFields,
   target,
-  className = '',
-  tracking
+  className = "",
+  tracking,
 }) => {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [targetId] = useState(target || `helpdog-search-${Math.random().toString(36).substring(2, 11)}`);
+  const [targetId] = useState(
+    target || `helpdog-search-${Math.random().toString(36).substring(2, 11)}`
+  );
   const searchBoxRef = useRef<any>(null);
 
   // スクリプトの動的読み込み
@@ -40,14 +42,14 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
       return;
     }
 
-    const script = document.createElement('script');
-    script.src = `${process.env.REACT_APP_HELPDOG_SDK_URL || 'https://sdk.noco.page'}/v1/script.js`;
+    const script = document.createElement("script");
+    script.src = "https://sdk.helpdog.ai/v1/script.js";
     script.async = true;
     script.onload = () => {
       setIsScriptLoaded(true);
     };
     script.onerror = () => {
-      console.error('Helpdog script failed to load');
+      console.error("Helpdog script failed to load");
     };
     document.head.appendChild(script);
 
@@ -67,24 +69,24 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
         siteId,
         target: `#${targetId}`,
         queryFields,
-        tracking: tracking || {}
+        tracking: tracking || {},
       });
     } catch (error) {
-      console.error('Failed to initialize Helpdog search:', error);
+      console.error("Failed to initialize Helpdog search:", error);
     }
 
     return () => {
-      if (searchBoxRef.current && typeof searchBoxRef.current.destroy === 'function') {
+      if (
+        searchBoxRef.current &&
+        typeof searchBoxRef.current.destroy === "function"
+      ) {
         searchBoxRef.current.destroy();
       }
     };
   }, [isScriptLoaded, siteId, targetId, queryFields, tracking]);
 
   return (
-    <div 
-      id={targetId} 
-      className={`helpdog-search-container ${className}`}
-    />
+    <div id={targetId} className={`helpdog-search-container ${className}`} />
   );
 };
 
