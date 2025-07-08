@@ -1,17 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-interface HelpdogSearchProps {
-  siteId: string;
-  queryFields: string; // CSS セレクター（HTMLと同じ形式）
-  target?: string; // ターゲットID（省略時は自動生成）
-  className?: string;
-  tracking?: {
-    form_id?: string;
-    form_name?: string;
-    hosting_type?: string;
-  };
-}
-
 declare global {
   interface Window {
     Helpdog?: {
@@ -22,17 +10,15 @@ declare global {
   }
 }
 
-const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
-  siteId,
-  queryFields,
-  target,
-  className = "",
-  tracking,
-}) => {
+const HelpdogSearch: React.FC = () => {
+  const siteId = "01JPVM5ZPX7E96GTDF9S3W1MS9";
+  const queryFields =
+    "#subject,#message,input[name='inquiryType'],input[name='services'],#implementationMethod";
+  const targetId = `helpdog-search-${Math.random()
+    .toString(36)
+    .substring(2, 11)}`;
+
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [targetId] = useState(
-    target || `helpdog-search-${Math.random().toString(36).substring(2, 11)}`
-  );
   const searchBoxRef = useRef<any>(null);
 
   // スクリプトの動的読み込み
@@ -69,7 +55,6 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
         siteId,
         target: `#${targetId}`,
         queryFields,
-        tracking: tracking || {},
       });
 
       // ResizeObserverでiframeの高さ変化を監視（Helpdog公式と同じ方式）
@@ -79,16 +64,16 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
       if (parentDiv) {
         // iframe要素を探す（少し待つ必要がある）
         const checkForIframe = () => {
-          const iframe = parentDiv.querySelector('iframe');
+          const iframe = parentDiv.querySelector("iframe");
           if (iframe) {
             resizeObserver = new ResizeObserver(() => {
               const height = iframe.clientHeight;
               if (height > 0) {
-                parentDiv.style.height = 'auto';
-                parentDiv.style.overflow = 'visible';
+                parentDiv.style.height = "auto";
+                parentDiv.style.overflow = "visible";
               } else {
-                parentDiv.style.height = '0px';
-                parentDiv.style.overflow = 'hidden';
+                parentDiv.style.height = "0px";
+                parentDiv.style.overflow = "hidden";
               }
             });
             resizeObserver.observe(iframe);
@@ -99,9 +84,9 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
         };
 
         // 初期状態は高さ0
-        parentDiv.style.height = '0px';
-        parentDiv.style.overflow = 'hidden';
-        
+        parentDiv.style.height = "0px";
+        parentDiv.style.overflow = "hidden";
+
         checkForIframe();
 
         // クリーンアップ時にResizeObserverを停止
@@ -114,18 +99,11 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
     }
 
     return () => {
-      if (
-        searchBoxRef.current &&
-        typeof searchBoxRef.current.destroy === "function"
-      ) {
-        searchBoxRef.current.destroy();
-      }
+      searchBoxRef.current?.destroy();
     };
-  }, [isScriptLoaded, siteId, targetId, queryFields, tracking]);
+  }, [isScriptLoaded, siteId, targetId, queryFields]);
 
-  return (
-    <div id={targetId} className={`helpdog-search-container ${className}`} />
-  );
+  return <div id={targetId} />;
 };
 
 export default HelpdogSearch;

@@ -184,7 +184,6 @@ export default function App() {
             required
           />
         </div>
-
       </div>
 
       <div className="form-section">
@@ -268,16 +267,7 @@ export default function App() {
         <div className="helpdog-form-group">
           <label>関連するヘルプ記事</label>
           <p className="help-text">入力内容に関連する記事が表示されます</p>
-          <HelpdogSearch
-            siteId="01JPVM5ZPX7E96GTDF9S3W1MS9"
-            queryFields="#subject,#message,input[name='inquiryType'],input[name='services'],#implementationMethod"
-            className="helpdog-search-box"
-            tracking={{
-              form_id: "contact-form",
-              form_name: "お問い合わせフォーム",
-              hosting_type: "external",
-            }}
-          />
+          <HelpdogSearch />
         </div>
       </div>
 
@@ -345,8 +335,9 @@ export default function App() {
           <dt>実装方法</dt>
           <dd>
             {
-              implementationMethods.find((method) => method.value === formData.implementationMethod)
-                ?.label
+              implementationMethods.find(
+                (method) => method.value === formData.implementationMethod
+              )?.label
             }
           </dd>
           <dt>件名</dt>

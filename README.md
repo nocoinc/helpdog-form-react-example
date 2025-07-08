@@ -16,8 +16,7 @@
 ```tsx
 <HelpdogSearch
   siteId="01JPVM5ZPX7E96GTDF9S3W1MS9"
-  queryFields="#subject,#message,input[name='inquiryType'],input[name='services'],#urgency"
-  className="helpdog-search-box"
+  queryFields="#subject,#message,input[name='inquiryType'],input[name='services'],#implementationMethod"
   tracking={{
     form_id: "contact-form",
     form_name: "お問い合わせフォーム",
