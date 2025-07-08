@@ -71,6 +71,44 @@ const HelpdogSearch: React.FC<HelpdogSearchProps> = ({
         queryFields,
         tracking: tracking || {},
       });
+
+      // ResizeObserverでiframeの高さ変化を監視（Helpdog公式と同じ方式）
+      let resizeObserver: ResizeObserver | null = null;
+      const parentDiv = document.getElementById(targetId);
+
+      if (parentDiv) {
+        // iframe要素を探す（少し待つ必要がある）
+        const checkForIframe = () => {
+          const iframe = parentDiv.querySelector('iframe');
+          if (iframe) {
+            resizeObserver = new ResizeObserver(() => {
+              const height = iframe.clientHeight;
+              if (height > 0) {
+                parentDiv.style.height = 'auto';
+                parentDiv.style.overflow = 'visible';
+              } else {
+                parentDiv.style.height = '0px';
+                parentDiv.style.overflow = 'hidden';
+              }
+            });
+            resizeObserver.observe(iframe);
+          } else {
+            // iframeがまだない場合は少し待って再試行
+            setTimeout(checkForIframe, 100);
+          }
+        };
+
+        // 初期状態は高さ0
+        parentDiv.style.height = '0px';
+        parentDiv.style.overflow = 'hidden';
+        
+        checkForIframe();
+
+        // クリーンアップ時にResizeObserverを停止
+        return () => {
+          resizeObserver?.disconnect();
+        };
+      }
     } catch (error) {
       console.error("Failed to initialize Helpdog search:", error);
     }

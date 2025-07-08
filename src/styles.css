@@ -309,14 +309,25 @@
 }
 
 /* Helpdog検索ボックス */
+.helpdog-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.helpdog-form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
 .helpdog-search-box {
-  margin: 12px 0;
 }
 
 .help-text {
   font-size: 14px;
   color: #666;
-  margin: 4px 0 8px 0;
+  margin: 0 0 0 0;
   font-style: italic;
 }
 

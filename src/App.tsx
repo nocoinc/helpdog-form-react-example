@@ -84,18 +84,6 @@ export default function App() {
       alert("必須項目をすべて入力してください。");
       return false;
     }
-    if (!formData.inquiryType) {
-      alert("お問い合わせ種別を選択してください。");
-      return false;
-    }
-    if (!formData.implementationMethod) {
-      alert("実装方法を選択してください。");
-      return false;
-    }
-    if (!formData.subject || !formData.message) {
-      alert("件名とメッセージを入力してください。");
-      return false;
-    }
     if (!formData.agreeToTerms) {
       alert("利用規約に同意してください。");
       return false;
@@ -202,7 +190,7 @@ export default function App() {
       <div className="form-section">
         <h3>お問い合わせ内容</h3>
         <div className="form-group">
-          <label>お問い合わせ種別 *</label>
+          <label>お問い合わせ種別</label>
           <div className="radio-group">
             {inquiryTypes.map((type) => (
               <label key={type.value} className="radio-label">
@@ -238,13 +226,12 @@ export default function App() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="implementationMethod">実装方法 *</label>
+          <label htmlFor="implementationMethod">実装方法</label>
           <select
             id="implementationMethod"
             name="implementationMethod"
             value={formData.implementationMethod}
             onChange={handleInputChange}
-            required
           >
             <option value="">選択してください</option>
             {implementationMethods.map((method) => (
@@ -256,31 +243,29 @@ export default function App() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="subject">件名 *</label>
+          <label htmlFor="subject">件名</label>
           <input
             type="text"
             id="subject"
             name="subject"
             value={formData.subject}
             onChange={handleInputChange}
-            required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="message">メッセージ *</label>
+          <label htmlFor="message">メッセージ</label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleInputChange}
             rows={5}
-            required
           />
         </div>
 
         {/* Helpdog検索ボックス - メッセージと件名の内容に基づいて検索 */}
-        <div className="form-group">
+        <div className="helpdog-form-group">
           <label>関連するヘルプ記事</label>
           <p className="help-text">入力内容に関連する記事が表示されます</p>
           <HelpdogSearch
