@@ -9,31 +9,9 @@
 - **リアルタイム検索**: 入力と同時に検索結果を更新
 - **レスポンシブデザイン**: モバイル対応
 
-## 実装のポイント
-
-フォームの入力値を監視して自動的に Helpdog の検索を実行：
-
-```tsx
-<HelpdogSearch
-  siteId="01JPVM5ZPX7E96GTDF9S3W1MS9"
-  queryFields="#subject,#message,input[name='inquiryType'],input[name='services'],#implementationMethod"
-  tracking={{
-    form_id: "contact-form",
-    form_name: "お問い合わせフォーム",
-    hosting_type: "external",
-  }}
-/>
-```
-
 ## 実行方法
 
 ```bash
 npm install
 npm start
-```
-
-## テスト
-
-```bash
-npm test
 ```
