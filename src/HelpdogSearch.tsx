@@ -18,35 +18,11 @@ const HelpdogSearch: React.FC = () => {
     .toString(36)
     .substring(2, 11)}`;
 
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
   const searchBoxRef = useRef<any>(null);
-
-  // スクリプトの動的読み込み
-  useEffect(() => {
-    if (window?.Helpdog?.site?.instantSearch) {
-      setIsScriptLoaded(true);
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://sdk.helpdog.ai/v1/script.js";
-    script.async = true;
-    script.onload = () => {
-      setIsScriptLoaded(true);
-    };
-    script.onerror = () => {
-      console.error("Helpdog script failed to load");
-    };
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
 
   // Helpdog検索の初期化
   useEffect(() => {
-    if (!isScriptLoaded || !window?.Helpdog?.site?.instantSearch) {
+    if (!window?.Helpdog?.site?.instantSearch) {
       return;
     }
 
@@ -101,7 +77,7 @@ const HelpdogSearch: React.FC = () => {
     return () => {
       searchBoxRef.current?.destroy();
     };
-  }, [isScriptLoaded, siteId, targetId, queryFields]);
+  }, [siteId, targetId, queryFields]);
 
   return <div id={targetId} />;
 };
